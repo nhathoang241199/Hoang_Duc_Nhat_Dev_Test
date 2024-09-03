@@ -1,0 +1,25 @@
+# Ignore node_modules
+node_modules
+
+# Ignore logs
+logs
+*.log
+
+# Bỏ qua các file test
+**/*.test.*
+**/*.spec.*
+**/__tests__/**
+**/tests/**
+
+# Ignore build artifacts
+dist
+build
+
+# Ignore Dockerfile (if not needed in the container)
+Dockerfile
+
+# Ignore other files/directories (optional)
+.git
+.gitignore
+.dockerignore
+README.md
