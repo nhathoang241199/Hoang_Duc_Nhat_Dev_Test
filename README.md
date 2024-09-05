@@ -4,6 +4,14 @@
 
 This project is a video-sharing application that allows users to register, log in, share YouTube videos, and like or unlike videos shared by others. The application is built using modern web technologies, focusing on performance, scalability, and ease of use.
 
+Link app: http://share--publi-e28o0aiccghh-1447109741.ap-southeast-1.elb.amazonaws.com/
+
+
+AWS deployment diagram:
+![aws-deployment-diagram](./aws-deploy.drawio.png)
+
+
+
 ### Key Features:
 
 - User registration and login.
@@ -30,78 +38,88 @@ Follow these steps to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/video-sharing-app.git
-
+   git clone https://github.com/nhathoang241199/Hoang_Duc_Nhat_Dev_Test.git
    ```
 
 2. **Install dependencies:**
-   For back-end:
+   1. For back-end:
+      ```bash
+      cd back-end
+      yarn
+      ```
+   
 
-   cd back-end
-   npm install
-
-   For front-end:
-   cd front-end
-   npm install
+   2. For front-end:
+      ```bash
+      cd front-end
+      yarn
+      ```
 
 3. **Environment Configuration:**
-   For back-end:
+   
+   1. For back-end:
+      ```bash
+      DB_HOST=localhost
+      DB_PORT=5432
+      DB_USERNAME=admin
+      DB_PASSWORD=123456
+      DB_NAME=video_share_db
+      SECRET_KEY=secretKey
+      ```
 
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_USERNAME=admin
-   DB_PASSWORD=123456
-   DB_NAME=video_share_db
-   SECRET_KEY=secretKey
-
-   For front-end:
-   NEXT_PUBLIC_API_URL=http://localhost:3001
-
-4. **Setup Database**
+   2. For front-end:
+      ```bash
+      NEXT_PUBLIC_API_URL=http://localhost:3001
+      ```
+      
+5. **Setup Database**
 
    1. Create the PostgreSQL database:
-      psql -U your_username -c "CREATE DATABASE video_share_db;"
+      ```bash
+      psql -U admin -c "CREATE DATABASE video_share_db;"
+      ```
 
-   2. Run Migrations:
-      npm run migrate
-
-      # or if using yarn
-
+   3. Run Migrations:
+      ```bash
       yarn migrate
+      ```
 
-   3. Seed the Database:
-      npm run seed
-      # or if using yarn
-      yarn seed
+6. **Run the application**
+   1. For back-end:
+      ```bash
+      npm run start:dev
+      ```
 
-5. **Run the application**
-   For back-end:
-
-   npm run start:dev
-
-   For front-end:
-
-   npm run dev
-
+   2. For front-end:
+      ```bash
+      npm run dev
+      ```
    Then open your browser and navigate to http://localhost:3000.
 
-   Run the test suite:
+   3. Run the test suite:
+      ```bash
+      yarn test
+      ```
 
-   npm test
-
-6. **Docker deployment**
-   docker-compose build
+7. **Docker deployment**
+   ```bash
    docker-compose up --build
+   ```
+   
    Then open your browser and navigate to http://localhost:3000.
 
-7. **Usage**
+8. **Usage**
+
    Register/Login: Create an account or log in to an existing one.
+   
    Share Video: Click on "Share video" and paste the YouTube URL to share.
+   
    Like/Unlike Videos: Use the like/unlike buttons to vote on shared videos.
 
-8. **Troubleshooting**
-   Issue: Application won't start. Solution: Ensure all dependencies are installed and the .env file is correctly configured.
+10. **Troubleshooting**
+    
+    Issue: Application won't start. Solution: Ensure all dependencies are installed and the .env file is correctly configured.
 
-   Issue: Database connection errors. Solution: Verify that PostgreSQL is running and the database credentials in the .env file are correct.
+    Issue: Database connection errors. Solution: Verify that PostgreSQL is running and the database credentials in the .env file are correct.
 
-   Issue: Docker container not starting. Solution: Check the Docker logs for any errors and ensure Docker is properly installed and running.
+    Issue: Docker container not starting. Solution: Check the Docker logs for any errors and ensure Docker is properly installed and running.
