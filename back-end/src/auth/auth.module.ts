@@ -15,7 +15,7 @@ import { User } from '../user/user.entity';
     PassportModule,
     JwtModule.register({
       secret: process.env.SECRETKEY || 'secretKey',
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: '24h' },
     }),
     TypeOrmModule.forFeature([User]),
   ],

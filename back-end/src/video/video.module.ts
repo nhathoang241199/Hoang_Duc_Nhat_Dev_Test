@@ -8,6 +8,7 @@ import { VoteRepository } from '../vote/vote.repository';
 import { Vote } from '../vote/vote.entity';
 import { VoteModule } from '../vote/vote.module';
 import { UserRepository } from 'src/user/user.repository';
+import { NotificationGateway } from 'src/gateways/notification.gateway';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { UserRepository } from 'src/user/user.repository';
     UserModule,
     VoteModule,
   ],
-  providers: [VideoService],
+  providers: [VideoService, NotificationGateway],
   controllers: [VideoController],
 })
 export class VideoModule {}

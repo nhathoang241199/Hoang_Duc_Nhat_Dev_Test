@@ -8,6 +8,7 @@ import { VoteService } from '../vote/vote.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { NotFoundException } from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
+import { NotificationGateway } from '../gateways/notification.gateway';
 
 // Mock các repository và dịch vụ
 const mockVideoRepository = () => ({
@@ -26,11 +27,17 @@ const mockVoteService = () => ({
   countVotesByVideo: jest.fn(),
 });
 
+// Mock NotificationGateway
+const mockNotificationGateway = {
+  sendVideoNotification: jest.fn(), // Mock phương thức gửi thông báo
+};
+
 describe('VideoService', () => {
   let videoService: VideoService;
   let videoRepository: Repository<Video>;
   let userService: UserService;
   let voteService: VoteService;
+  let notificationGateway: NotificationGateway;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -39,6 +46,10 @@ describe('VideoService', () => {
         { provide: getRepositoryToken(Video), useValue: mockVideoRepository() },
         { provide: UserService, useValue: mockUserService() },
         { provide: VoteService, useValue: mockVoteService() },
+        {
+          provide: NotificationGateway,
+          useValue: mockNotificationGateway,
+        },
       ],
     }).compile();
 
@@ -46,6 +57,7 @@ describe('VideoService', () => {
     videoRepository = module.get<Repository<Video>>(getRepositoryToken(Video));
     userService = module.get<UserService>(UserService);
     voteService = module.get<VoteService>(VoteService);
+    notificationGateway = module.get<NotificationGateway>(NotificationGateway);
   });
 
   it('should return a list of videos', async () => {

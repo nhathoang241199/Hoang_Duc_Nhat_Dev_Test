@@ -199,12 +199,8 @@ describe("Video API Calls", () => {
 
       mockGet.mockRejectedValue(new Error("API call failed"));
 
-      const result = await fetchYoutubeVideoDetails(videoId, apiKey);
-
-      expect(result).toBeNull();
-      expect(console.error).toHaveBeenCalledWith(
-        "Error fetching video details:",
-        expect.any(Error)
+      await expect(fetchYoutubeVideoDetails(videoId, apiKey)).rejects.toThrow(
+        "Video not found!"
       );
     });
   });

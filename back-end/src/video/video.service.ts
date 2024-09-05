@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { VoteDto } from './dto/vote-video.dto';
 import { Video } from './video.entity';
+import { NotificationGateway } from '../gateways/notification.gateway';
 
 enum EVoteStatus {
   liked = 'liked',
@@ -20,6 +21,7 @@ export class VideoService {
     private readonly videoRepository: Repository<Video>,
     private readonly userService: UserService,
     private readonly voteService: VoteService,
+    private notificationGateway: NotificationGateway,
   ) {}
 
   async findAll(
@@ -82,7 +84,12 @@ export class VideoService {
 
   async create(video: CreateVideoDto, userId: number): Promise<Video> {
     const user = await this.userService.findOne(userId);
-    return this.videoRepository.save({ ...video, user: user });
+    const savedVideo = this.videoRepository.save({ ...video, user: user });
+    if (user) {
+      this.notificationGateway.sendVideoNotification(video.title, user.email);
+    }
+
+    return savedVideo;
   }
 
   async delete(id: number): Promise<void> {

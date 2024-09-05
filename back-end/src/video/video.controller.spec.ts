@@ -7,6 +7,7 @@ import { VoteDto } from './dto/vote-video.dto';
 import { NotFoundException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { OptionalAuthGuard } from '../auth/optional-auth.guard';
+import { NotificationGateway } from '../gateways/notification.gateway';
 
 // Mock VideoService
 const mockVideoService = {
@@ -17,9 +18,15 @@ const mockVideoService = {
   vote: jest.fn(),
 };
 
+// Mock NotificationGateway
+const mockNotificationGateway = {
+  sendVideoNotification: jest.fn(), // Mock phương thức gửi thông báo
+};
+
 describe('VideoController', () => {
   let videoController: VideoController;
   let videoService: VideoService;
+  let notificationGateway: NotificationGateway;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -29,11 +36,16 @@ describe('VideoController', () => {
           provide: VideoService,
           useValue: mockVideoService,
         },
+        {
+          provide: NotificationGateway,
+          useValue: mockNotificationGateway,
+        },
       ],
     }).compile();
 
     videoController = module.get<VideoController>(VideoController);
     videoService = module.get<VideoService>(VideoService);
+    notificationGateway = module.get<NotificationGateway>(NotificationGateway);
   });
 
   describe('findAll', () => {

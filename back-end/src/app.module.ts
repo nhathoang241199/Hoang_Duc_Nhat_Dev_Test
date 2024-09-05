@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { VideoModule } from './video/video.module';
 import { Vote } from './vote/vote.entity';
+import { NotificationGateway } from './gateways/notification.gateway';
 
 @Module({
   imports: [
@@ -24,6 +25,6 @@ import { Vote } from './vote/vote.entity';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, NotificationGateway],
 })
 export class AppModule {}
