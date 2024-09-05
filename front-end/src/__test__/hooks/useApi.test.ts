@@ -275,20 +275,15 @@ describe("useApi custom hook", () => {
         },
       });
 
+      // Render hook useApi
       const { result } = renderHook(() => useApi());
 
       await act(async () => {
-        await result.current.getUserInfo("mockToken");
+        const success = await result.current.getUserInfo("mockToken");
+        expect(success).toBe(false);
       });
 
-      expect(mockToast).toHaveBeenCalledWith({
-        title: "Get user info failed!",
-        description: "Failed to get user info",
-        status: "error",
-        duration: 2000,
-        position: "top-right",
-        isClosable: true,
-      });
+      expect(mockDispatch).toHaveBeenCalledWith(setEmail(""));
     });
   });
 });

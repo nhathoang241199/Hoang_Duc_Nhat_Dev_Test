@@ -162,15 +162,8 @@ const useApi = () => {
         dispatch(setEmail(data.email));
       }
     } catch (error: any) {
-      toast.closeAll();
-      toast({
-        title: "Get user info failed!",
-        description: error.response?.data?.message,
-        status: "error",
-        duration: 2000,
-        position: "top-right",
-        isClosable: true,
-      });
+      localStorage.removeItem("user_token");
+      dispatch(setEmail(""));
       return false;
     }
   };

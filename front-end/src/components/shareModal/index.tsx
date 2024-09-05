@@ -59,6 +59,7 @@ const ShareModal: FC<TProps> = ({ onClose, isOpen }) => {
       const apiKey = "AIzaSyBw9jDigSIheZAojJ3sxY8OaYkBx0DvKKM";
       try {
         const videoDetails = await fetchYoutubeVideoDetails(videoId, apiKey);
+
         if (videoDetails) {
           const { title, description, banner } = videoDetails;
           const dataSubmit = {
@@ -85,6 +86,16 @@ const ShareModal: FC<TProps> = ({ onClose, isOpen }) => {
           isClosable: true,
         });
       }
+    } else {
+      toast.closeAll();
+      toast({
+        title: "Share video failed!",
+        description: "Video id or url is not valid!",
+        status: "error",
+        duration: 2000,
+        position: "top-right",
+        isClosable: true,
+      });
     }
   };
 

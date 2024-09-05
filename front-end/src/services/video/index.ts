@@ -69,7 +69,6 @@ export const fetchYoutubeVideoDetails = async (
       throw new Error("Video not found!");
     }
   } catch (error) {
-    console.error("Error fetching video details:", error);
-    return null;
+    throw new Error("Video not found!");
   }
 };

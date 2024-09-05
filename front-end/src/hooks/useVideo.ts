@@ -3,7 +3,7 @@ import { useState } from "react";
 import useSWR from "swr";
 const pageSize = 10;
 
-const useDepositReport = () => {
+const useVideo = () => {
   const [page, setPage] = useState(1);
 
   const { data, error, mutate } = useSWR(
@@ -15,13 +15,13 @@ const useDepositReport = () => {
     callGetVideos
   );
   return {
-    data: data?.data?.videos || [],
+    data: data?.data?.videos,
     isError: error,
-    totalPage: data?.data?.totalPage || 1,
+    totalPage: data?.data?.totalPages || 1,
     page,
     setPage,
     mutate,
   };
 };
 
-export default useDepositReport;
+export default useVideo;
