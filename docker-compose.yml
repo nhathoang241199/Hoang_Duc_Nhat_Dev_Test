@@ -32,19 +32,19 @@ services:
     networks:
       - app-network
 
-  # frontend:
-  #   build:
-  #     context: ./front-end
-  #     args:
-  #       NEXT_PUBLIC_API_URL: http://backend:3001
-  #   restart: always
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: ./front-end
+      args:
+        NEXT_PUBLIC_API_URL: http://backend:3001
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
     
-  #   networks:
-  #     - app-network
+    networks:
+      - app-network
 
 volumes:
   postgres_data:

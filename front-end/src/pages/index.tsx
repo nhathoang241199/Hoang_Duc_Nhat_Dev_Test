@@ -2,6 +2,7 @@ import AuthLayout from "@/components/layouts/auth";
 import ShareModal from "@/components/shareModal";
 import useApi from "@/hooks/useApi";
 import useVideo from "@/hooks/useVideo";
+import useUser from "@/redux/user/selectors";
 import { getYoutubeVideoId, truncateString } from "@/utils";
 import {
   Button,
@@ -47,6 +48,7 @@ export default function Home() {
   const { data, setPage, mutate, page, totalPage } = useVideo();
   const { voteVideo } = useApi();
   const toast = useToast();
+  const user = useUser();
   const iframeWidth = useBreakpointValue(
     {
       base: "100%",
@@ -75,16 +77,18 @@ export default function Home() {
     );
 
     socket.on("videoShared", (data) => {
-      globalMutate({ key: "getVideos", page: 1, pageSize: 10 });
-      toast.closeAll();
-      toast({
-        title: `${data.user} just shared a video`,
-        description: data.title,
-        status: "success",
-        duration: 3000,
-        position: "top-right",
-        isClosable: true,
-      });
+      if (data.user !== user.email) {
+        globalMutate({ key: "getVideos", page: 1, pageSize: 10 });
+        toast.closeAll();
+        toast({
+          title: `${data.user} just shared a video`,
+          description: data.title,
+          status: "success",
+          duration: 3000,
+          position: "top-right",
+          isClosable: true,
+        });
+      }
     });
 
     return () => {

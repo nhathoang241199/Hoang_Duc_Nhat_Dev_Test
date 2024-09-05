@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
 import { VoteService } from '../vote/vote.service';
@@ -83,7 +87,17 @@ export class VideoService {
   }
 
   async create(video: CreateVideoDto, userId: number): Promise<Video> {
+    const { url } = video;
+
+    const existingVideo = await this.videoRepository.findOne({
+      where: { url },
+    });
+
     const user = await this.userService.findOne(userId);
+
+    if (existingVideo) {
+      throw new ConflictException('The video already exists!');
+    }
     const savedVideo = this.videoRepository.save({ ...video, user: user });
     if (user) {
       this.notificationGateway.sendVideoNotification(video.title, user.email);
