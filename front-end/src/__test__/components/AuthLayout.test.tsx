@@ -1,10 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import AuthLayout from "./auth";
-import Header from "../header";
+import AuthLayout from "../../components/layouts/auth";
+import Header from "../../components/header";
 import useApi from "@/hooks/useApi";
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
 
 // Mock các module
-jest.mock("../header", () => jest.fn(() => <div data-testid="header" />));
+jest.mock("../../components/header", () =>
+  jest.fn(() => <div data-testid="header" />)
+);
 jest.mock("@/hooks/useApi", () => ({
   __esModule: true,
   default: jest.fn(() => ({
@@ -12,12 +16,28 @@ jest.mock("@/hooks/useApi", () => ({
   })),
 }));
 
+// mock redux
+const mockStore = configureStore([]);
+
 describe("AuthLayout", () => {
+  let store: any;
+
+  beforeEach(() => {
+    store = mockStore({
+      user: {
+        email: "",
+      },
+    });
+  });
+
   it("renders the Header component", () => {
     render(
-      <AuthLayout>
-        <div>Test Children</div>
-      </AuthLayout>
+      <Provider store={store}>
+        {" "}
+        <AuthLayout>
+          <div>Test Children</div>
+        </AuthLayout>
+      </Provider>
     );
 
     // Kiểm tra xem Header có được render hay không
@@ -27,9 +47,12 @@ describe("AuthLayout", () => {
 
   it("renders the children components", () => {
     render(
-      <AuthLayout>
-        <div data-testid="child">Test Children</div>
-      </AuthLayout>
+      <Provider store={store}>
+        {" "}
+        <AuthLayout>
+          <div data-testid="child">Test Children</div>
+        </AuthLayout>
+      </Provider>
     );
 
     // Kiểm tra xem children có được render hay không
@@ -46,9 +69,12 @@ describe("AuthLayout", () => {
     localStorage.setItem("user_token", "fake_token");
 
     render(
-      <AuthLayout>
-        <div>Test Children</div>
-      </AuthLayout>
+      <Provider store={store}>
+        {" "}
+        <AuthLayout>
+          <div>Test Children</div>
+        </AuthLayout>
+      </Provider>
     );
 
     // Kiểm tra xem getUserInfo có được gọi hay không
@@ -63,9 +89,12 @@ describe("AuthLayout", () => {
     localStorage.removeItem("user_token");
 
     render(
-      <AuthLayout>
-        <div>Test Children</div>
-      </AuthLayout>
+      <Provider store={store}>
+        {" "}
+        <AuthLayout>
+          <div>Test Children</div>
+        </AuthLayout>
+      </Provider>
     );
 
     // Kiểm tra xem getUserInfo không được gọi

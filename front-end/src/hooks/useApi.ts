@@ -39,6 +39,7 @@ const useApi = () => {
           title: "Login successfully!",
           status: "success",
           duration: 2000,
+          position: "top-right",
           isClosable: true,
         });
         setLoading(false);
@@ -50,6 +51,7 @@ const useApi = () => {
         description: error.response?.data?.message,
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       setLoading(false);
@@ -70,6 +72,7 @@ const useApi = () => {
           title: "Registered successfully!",
           status: "success",
           duration: 2000,
+          position: "top-right",
           isClosable: true,
         });
         setLoading(false);
@@ -83,6 +86,7 @@ const useApi = () => {
         description: error?.response?.data?.message || error?.message,
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       setLoading(false);
@@ -103,6 +107,7 @@ const useApi = () => {
           title: "Share video successfully!",
           status: "success",
           duration: 2000,
+          position: "top-right",
           isClosable: true,
         });
         setLoading(false);
@@ -115,6 +120,7 @@ const useApi = () => {
         description: error.response?.data?.message,
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       setLoading(false);
@@ -139,6 +145,7 @@ const useApi = () => {
         description: error.response?.data?.message,
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       return false;
@@ -161,6 +168,7 @@ const useApi = () => {
         description: error.response?.data?.message,
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       return false;

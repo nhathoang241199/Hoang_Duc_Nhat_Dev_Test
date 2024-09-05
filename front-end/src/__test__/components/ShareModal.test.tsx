@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import ShareModal from "./index";
+import ShareModal from "../../components/shareModal";
 import useApi from "@/hooks/useApi";
 import { fetchYoutubeVideoDetails } from "@/services/video";
 import { mutate } from "swr";

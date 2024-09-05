@@ -81,6 +81,7 @@ const ShareModal: FC<TProps> = ({ onClose, isOpen }) => {
           description: error?.message,
           status: "error",
           duration: 2000,
+          position: "top-right",
           isClosable: true,
         });
       }

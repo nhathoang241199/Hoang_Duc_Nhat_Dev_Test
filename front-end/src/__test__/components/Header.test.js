@@ -3,9 +3,9 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { useRouter } from 'next/router';
 import configureStore from 'redux-mock-store';
-import Header from './index.tsx';
+import Header from '../../components/header/index.tsx';
 import '@testing-library/jest-dom';
-import ShareModal from '../shareModal/index.tsx';
+import ShareModal from '../../components/shareModal/index.tsx';
 
 // mock useRouter
 jest.mock('next/router', () => ({
@@ -13,7 +13,7 @@ jest.mock('next/router', () => ({
 }));
 
 // mock component share modal
-jest.mock('../shareModal', () => jest.fn(() => <div data-testid="share-modal" />));
+jest.mock('../../components/shareModal', () => jest.fn(() => <div data-testid="share-modal" />));
 
 // mock redux
 const mockStore = configureStore([]);

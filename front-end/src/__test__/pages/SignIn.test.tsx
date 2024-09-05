@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import SignIn from "./index";
+import SignIn from "../../pages/signIn";
 import useApi from "@/hooks/useApi";
 
 // Mock các module cần thiết

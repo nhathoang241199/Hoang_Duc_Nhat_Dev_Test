@@ -91,6 +91,7 @@ describe("useApi custom hook", () => {
         title: "Login successfully!",
         status: "success",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
     });
@@ -116,6 +117,7 @@ describe("useApi custom hook", () => {
         description: "Invalid credentials",
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
     });
@@ -145,6 +147,7 @@ describe("useApi custom hook", () => {
         title: "Registered successfully!",
         status: "success",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
     });
@@ -170,6 +173,7 @@ describe("useApi custom hook", () => {
         description: "Email already exists",
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
     });
@@ -201,6 +205,7 @@ describe("useApi custom hook", () => {
         title: "Share video successfully!",
         status: "success",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       expect(response).toBe(true);
@@ -241,6 +246,7 @@ describe("useApi custom hook", () => {
         description: "Failed to vote",
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
       expect(response).toBe(false);
@@ -280,6 +286,7 @@ describe("useApi custom hook", () => {
         description: "Failed to get user info",
         status: "error",
         duration: 2000,
+        position: "top-right",
         isClosable: true,
       });
     });
